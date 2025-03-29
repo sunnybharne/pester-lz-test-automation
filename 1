@@ -1,0 +1,64 @@
+BeforeAll { # BeforeAll is a setup block that runs before all tests
+    Write-Output 'This is before all block'
+    . $PSScriptRoot/Get-Planet.ps1
+    # . $PSCommandPath.Replace('.Tests.ps1','.ps1')  # Interesting way to call the function
+}
+
+Describe 'Suite 1' {
+    BeforeAll {
+    }
+
+    Context 'Nested suite 1' {
+      It 'Test 1' {
+         $allPlanets = Get-Planet
+         $allPlanets.Count | Should -Be 8
+      }
+      It 'Test 2' {
+      }
+    }
+
+    Context 'Nested suite 2' {
+      It 'Test 1' {
+      }
+      It 'Test 2' {
+      }
+    }
+
+    AfterAll {
+    }
+}
+
+Describe 'Describe block 2' { # Describe is test suite
+    BeforeAll {
+        Write-Output 'This runs before all the tests in this describe block 1'
+    }
+
+    Context 'Nested suite 1' { # Context is nested test suite
+      It 'Test 1' {
+         Write-Output 'This is test 1'
+      }
+      It 'Test 2' {
+          Write-Output 'This is test 2'
+      }
+    }
+
+    Context 'Nested suite 2' { # Context is a nested test suite
+      It 'Test 1' {
+         Write-Output 'This is test 1'
+      }
+      It 'Test 2' {
+          Write-Output 'This is test 2'
+      }
+    }
+
+    AfterAll { # AfterAll is a teardown block that runs after all tests
+        Write-Output 'After Describe block 1'
+    }
+}
+
+AfterAll { # AfterAll is a teardown block that runs after all Describe blocks
+    Write-Output 'After all describe blocks'
+}
+
+# Before each not tested
+# Afte each no tested
